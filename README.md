@@ -5,7 +5,7 @@ Sets up deepfake/Faceswap for cloud machines and executes training script with t
 
 ## Bootstrap: Optimized for Vast.ai (non root user)
 
-'''
+``` 
 #!/bin/bash
 
 # this script downloads and installs the faceswap program 
@@ -22,4 +22,4 @@ git clone https://github.com/JustinGuese/cloud_faceswap.git
 cd ~/cloud_faceswap
 chmod +x faceswap_setup_x64.sh
 ./faceswap_setup_x64.sh -y 
-'''
+``` 
