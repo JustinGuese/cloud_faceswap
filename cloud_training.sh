@@ -10,7 +10,7 @@ usermod -aG sudo deepfake
 su - deepfake
 
 
-
+git clone https://github.com/JustinGuese/cloud_faceswap.git
 cd ~/cloud_faceswap
 chmod +x faceswap_setup_x64.sh
 ./faceswap_setup_x64.sh -y 

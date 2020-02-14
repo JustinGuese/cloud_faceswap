@@ -87,8 +87,9 @@ cleanup_tmp_dir() {
 ask () {
     # Ask for input. First parameter: Display text, 2nd parameter variable name
     default="${!2}"
-    read -rp $'\e[36m'"$1 [default: '$default']: "$'\e[97m' inp
+    #read -rp $'\e[36m'"$1 [default: '$default']: "$'\e[97m' inp
     inp="${inp:-${default}}"
+	inp = default
     if [ "$inp" == "\n" ] ; then inp=${!2} ; fi
     printf -v $2 "$inp"
 }
@@ -96,36 +97,38 @@ ask () {
 ask_yesno () {
     # Ask yes or no. First Param: Question, 2nd param: Default
     # Returns True for yes, False for No
-    case $2 in
-        [Yy]* ) opts="[YES/no]" ;;
-        [Nn]* ) opts="[yes/NO]" ;;
-    esac
-    while true; do
-        read -rp $'\e[36m'"$1 $opts: "$'\e[97m' yn
-        yn="${yn:-${2}}"
-        case $yn in
-            [Yy]* ) retval=true ; break ;;
-            [Nn]* ) retval=false ; break ;;
-            * ) echo "Please answer yes or no." ;;
-        esac
-    done
-    $retval
+    # case $2 in
+        # [Yy]* ) opts="[YES/no]" ;;
+        # [Nn]* ) opts="[yes/NO]" ;;
+    # esac
+    # while true; do
+        # read -rp $'\e[36m'"$1 $opts: "$'\e[97m' yn
+        # yn="${yn:-${2}}"
+        # case $yn in
+            # [Yy]* ) retval=true ; break ;;
+            # [Nn]* ) retval=false ; break ;;
+            # * ) echo "Please answer yes or no." ;;
+        # esac
+    # done
+    #$retval
+	return True # yes to all
 }
 
 
 ask_version() {
     # Ask which version of faceswap to install
-    while true; do
-        default=1
-        read -rp $'\e[36m'"Select: 1 (NVIDIA), 2 (AMD), 3 (CPU) [default: $default]: "$'\e[97m' vers
-        vers="${vers:-${default}}"
-        case $vers in
-            1) VERSION="nvidia" ; break ;;
-            2) VERSION="amd" ; break ;;
-            3) VERSION="cpu" ; break ;;
-            * ) echo "Invalid selection." ;;
-        esac
-    done
+    # while true; do
+        # default=1
+        # read -rp $'\e[36m'"Select: 1 (NVIDIA), 2 (AMD), 3 (CPU) [default: $default]: "$'\e[97m' vers
+        # vers="${vers:-${default}}"
+        # case $vers in
+            # 1) VERSION="nvidia" ; break ;;
+            # 2) VERSION="amd" ; break ;;
+            # 3) VERSION="cpu" ; break ;;
+            # * ) echo "Invalid selection." ;;
+        # esac
+    # done
+	VERSION="nvidia"
 }
 
 banner () {
@@ -213,7 +216,7 @@ user_input() {
     echo ""
     info "\e[33mIMPORTANT:\e[97m Make sure that the user '$USER' has full permissions for all of the\
     destinations that you select."
-    read -rp $'\e[36m'"Press 'ENTER' to continue with the setup..."$'\e[36m'
+    #read -rp $'\e[36m'"Press 'ENTER' to continue with the setup..."$'\e[36m'
     conda_opts
     faceswap_opts
     post_install_opts
